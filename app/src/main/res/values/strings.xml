@@ -12,4 +12,5 @@
   <string name="network_toast">Uh-oh! This app requires an internet connection</string>
   <string name="add_new_stock">Add a new stock</string>
   <string name="already_saved_toast">This stock is already saved!</string>
+  <string name="stock_detail_label">Stock</string>
 </resources>
