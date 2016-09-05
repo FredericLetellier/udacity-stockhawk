@@ -17,6 +17,7 @@ public class QuoteProvider {
 
   interface Path{
     String QUOTES = "quotes";
+    String HISTORICAL_QUOTATION = "historical_quotation";
   }
 
   private static Uri buildUri(String... paths){
@@ -45,5 +46,14 @@ public class QuoteProvider {
     public static Uri withSymbol(String symbol){
       return buildUri(Path.QUOTES, symbol);
     }
+  }
+
+  @TableEndpoint(table = QuoteDatabase.HISTORICAL_QUOTATION)
+  public static class HistoricalQuotation{
+    @ContentUri(
+            path = Path.HISTORICAL_QUOTATION,
+            type = "vnd.android.cursor.dir/historical_quotation"
+    )
+    public static final Uri CONTENT_URI = buildUri(Path.HISTORICAL_QUOTATION);
   }
 }

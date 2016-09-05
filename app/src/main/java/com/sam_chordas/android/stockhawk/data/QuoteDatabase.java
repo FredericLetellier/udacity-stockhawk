@@ -10,7 +10,8 @@ import net.simonvt.schematic.annotation.Table;
 public class QuoteDatabase {
   private QuoteDatabase(){}
 
-  public static final int VERSION = 7;
+  public static final int VERSION = 8;
 
   @Table(QuoteColumns.class) public static final String QUOTES = "quotes";
+  @Table(HistoricalQuotationColumns.class) public static final String HISTORICAL_QUOTATION = "historical_quotation";
 }
