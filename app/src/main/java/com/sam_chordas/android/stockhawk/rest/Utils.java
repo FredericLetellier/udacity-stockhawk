@@ -2,12 +2,16 @@ package com.sam_chordas.android.stockhawk.rest;
 
 import android.content.ContentProviderOperation;
 import android.util.Log;
+
+import com.sam_chordas.android.stockhawk.data.HistoricalQuotationColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
-import java.util.ArrayList;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 /**
  * Created by sam_chordas on 10/8/15.
@@ -39,6 +43,29 @@ public class Utils {
               jsonObject = resultsArray.getJSONObject(i);
               batchOperations.add(buildBatchOperation(jsonObject));
             }
+          }
+        }
+      }
+    } catch (JSONException e){
+      Log.e(LOG_TAG, "String to JSON failed: " + e);
+    }
+    return batchOperations;
+  }
+
+  public static ArrayList quoteHistoJsonToContentVals(String JSON){
+    ArrayList<ContentProviderOperation> batchOperations = new ArrayList<>();
+    JSONObject jsonObject = null;
+    JSONArray resultsArray = null;
+    try{
+      jsonObject = new JSONObject(JSON);
+      if (jsonObject != null && jsonObject.length() != 0){
+        jsonObject = jsonObject.getJSONObject("query");
+        resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
+
+        if (resultsArray != null && resultsArray.length() != 0){
+          for (int i = 0; i < resultsArray.length(); i++){
+            jsonObject = resultsArray.getJSONObject(i);
+            batchOperations.add(buildHistoBatchOperation(jsonObject));
           }
         }
       }
@@ -87,6 +114,19 @@ public class Utils {
         builder.withValue(QuoteColumns.ISUP, 1);
       }
 
+    } catch (JSONException e){
+      e.printStackTrace();
+    }
+    return builder.build();
+  }
+
+  public static ContentProviderOperation buildHistoBatchOperation(JSONObject jsonObject){
+    ContentProviderOperation.Builder builder = ContentProviderOperation.newInsert(
+            QuoteProvider.HistoricalQuotation.CONTENT_URI);
+    try {
+      builder.withValue(HistoricalQuotationColumns.SYMBOL, jsonObject.getString("Symbol"));
+      builder.withValue(HistoricalQuotationColumns.DATE, jsonObject.getString("Date"));
+      builder.withValue(HistoricalQuotationColumns.OPENPRICE, jsonObject.getString("Open"));
     } catch (JSONException e){
       e.printStackTrace();
     }
