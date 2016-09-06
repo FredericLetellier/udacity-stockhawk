@@ -14,4 +14,9 @@
   <string name="already_saved_toast">This stock is already saved!</string>
   <string name="stock_detail_label">Stock</string>
   <string name="graph_content_description">Chart of stock</string>
+  <string name="graph_begin">Graph start</string>
+  <string name="graph_end">Graph end</string>
+  <string name="graph_evolution">Evolution</string>
+  <string name="graph_max">Max</string>
+  <string name="graph_min">Min</string>
 </resources>

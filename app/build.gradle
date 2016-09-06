@@ -37,4 +37,6 @@ dependencies {
   }
   // Added for chart
   compile 'com.github.lecho:hellocharts-android:v1.5.8'
+  // Added for cardview
+  compile 'com.android.support:cardview-v7:23.1.1'
 }
