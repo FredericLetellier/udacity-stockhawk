@@ -13,4 +13,5 @@
   <string name="add_new_stock">Add a new stock</string>
   <string name="already_saved_toast">This stock is already saved!</string>
   <string name="stock_detail_label">Stock</string>
+  <string name="graph_content_description">Chart of stock</string>
 </resources>
