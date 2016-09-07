@@ -3,6 +3,7 @@ package com.sam_chordas.android.stockhawk.widget;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
+import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.sam_chordas.android.stockhawk.R;
@@ -15,13 +16,17 @@ public class StockAppWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        CharSequence widgetText = context.getString(R.string.appwidget_text);
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.stock_app_widget);
-        views.setTextViewText(R.id.appwidget_text, widgetText);
+
+        // Create an Intent to launch MainActivity
+        Intent adapter = new Intent(context, StockWidgetService.class);
+        adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
+        views.setRemoteAdapter(R.id.stock_list, adapter);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetId, R.id.stock_list);
     }
 
     @Override
