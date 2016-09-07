@@ -21,4 +21,5 @@
     <string name="graph_min">Min</string>
     <string name="appwidget_text">EXAMPLE</string>
     <string name="add_widget">Add widget</string>
+    <string name="invalid_stock_toast">This stock symbol is invalid!</string>
 </resources>

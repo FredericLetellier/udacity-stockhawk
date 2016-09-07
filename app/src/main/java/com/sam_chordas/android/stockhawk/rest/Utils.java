@@ -34,8 +34,14 @@ public class Utils {
         if (count == 1){
           jsonObject = jsonObject.getJSONObject("results")
               .getJSONObject("quote");
-          batchOperations.add(buildBatchOperation(jsonObject));
-        } else{
+
+          if (jsonObject.getString("Bid") == null || jsonObject.getString("Bid").equals("null")){
+            return null;
+          } else {
+            batchOperations.add(buildBatchOperation(jsonObject));
+          }
+
+        } else {
           resultsArray = jsonObject.getJSONObject("results").getJSONArray("quote");
 
           if (resultsArray != null && resultsArray.length() != 0){
