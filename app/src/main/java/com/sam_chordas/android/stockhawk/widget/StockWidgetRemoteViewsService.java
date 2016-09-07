@@ -10,6 +10,7 @@ import android.widget.RemoteViewsService;
 import com.sam_chordas.android.stockhawk.R;
 import com.sam_chordas.android.stockhawk.data.QuoteColumns;
 import com.sam_chordas.android.stockhawk.data.QuoteProvider;
+import com.sam_chordas.android.stockhawk.ui.MyStockDetailActivity;
 
 /**
  * udacity-stockhawk
@@ -66,7 +67,8 @@ public class StockWidgetRemoteViewsService implements RemoteViewsService.RemoteV
     public RemoteViews getViewAt(int position) {
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.list_item_quote);
         if (mCursor.moveToPosition(position)) {
-            remoteViews.setTextViewText(R.id.stock_symbol, mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL)));
+            String symbol = mCursor.getString(mCursor.getColumnIndex(QuoteColumns.SYMBOL));
+            remoteViews.setTextViewText(R.id.stock_symbol, symbol);
             remoteViews.setTextViewText(R.id.bid_price, mCursor.getString(mCursor.getColumnIndex(QuoteColumns.BIDPRICE)));
             remoteViews.setTextViewText(R.id.change, mCursor.getString(mCursor.getColumnIndex(QuoteColumns.CHANGE)));
 
@@ -75,6 +77,11 @@ public class StockWidgetRemoteViewsService implements RemoteViewsService.RemoteV
             } else {
                 remoteViews.setInt(R.id.change, "setBackgroundResource", R.drawable.percent_change_pill_red);
             }
+
+            Intent intent = new Intent();
+            intent.putExtra(MyStockDetailActivity.ARG_STOCK_SYMBOL, symbol);
+            intent.putExtra(MyStockDetailActivity.ARG_PARENT, MyStockDetailActivity.ARGVALUE_PARENT_WIDGET);
+            remoteViews.setOnClickFillInIntent(R.id.stock_row, intent);
         }
         return remoteViews;
     }

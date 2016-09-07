@@ -89,6 +89,7 @@ public class MyStocksActivity extends AppCompatActivity implements LoaderManager
                 String stockSymbol = ((TextView) v.findViewById(R.id.stock_symbol)).getText().toString();
                 Intent intent = new Intent(mContext, MyStockDetailActivity.class);
                 intent.putExtra(MyStockDetailActivity.ARG_STOCK_SYMBOL, stockSymbol);
+                intent.putExtra(MyStockDetailActivity.ARG_PARENT, MyStockDetailActivity.ARGVALUE_PARENT_ACTIVITY);
                 startActivity(intent);
               }
             }));

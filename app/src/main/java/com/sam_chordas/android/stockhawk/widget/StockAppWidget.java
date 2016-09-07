@@ -1,5 +1,6 @@
 package com.sam_chordas.android.stockhawk.widget;
 
+import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.content.Intent;
 import android.widget.RemoteViews;
 
 import com.sam_chordas.android.stockhawk.R;
+import com.sam_chordas.android.stockhawk.ui.MyStockDetailActivity;
 
 /**
  * Implementation of App Widget functionality.
@@ -23,6 +25,11 @@ public class StockAppWidget extends AppWidgetProvider {
         Intent adapter = new Intent(context, StockWidgetService.class);
         adapter.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         views.setRemoteAdapter(R.id.stock_list, adapter);
+
+        //Intent to start StockGraphActivity
+        Intent myStockDetailActivityIntent = new Intent(context, MyStockDetailActivity.class);
+        PendingIntent myStockDetailActivityPendingIntent = PendingIntent.getActivity(context, 0, myStockDetailActivityIntent, 0);
+        views.setPendingIntentTemplate(R.id.stock_list, myStockDetailActivityPendingIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

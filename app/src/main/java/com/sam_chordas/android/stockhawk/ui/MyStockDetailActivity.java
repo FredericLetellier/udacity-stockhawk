@@ -2,6 +2,7 @@ package com.sam_chordas.android.stockhawk.ui;
 
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -31,6 +32,9 @@ import lecho.lib.hellocharts.view.LineChartView;
 public class MyStockDetailActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor>{
 
     public static final String ARG_STOCK_SYMBOL = "stock_symbol";
+    public static final String ARG_PARENT = "parent";
+    public static final String ARGVALUE_PARENT_ACTIVITY = "activity";
+    public static final String ARGVALUE_PARENT_WIDGET = "widget";
     private static final int CURSOR_LOADER_ID = 0;
 
     private String stockSymbol;
@@ -171,5 +175,17 @@ public class MyStockDetailActivity extends AppCompatActivity implements LoaderMa
     @Override
     public void onLoaderReset(Loader<Cursor> loader) {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (getIntent().getExtras().getString(ARG_PARENT) == ARGVALUE_PARENT_WIDGET) {
+            Intent intent = new Intent(this, MyStocksActivity.class);
+            startActivity(intent);
+        } else {
+            finish();
+        }
     }
 }
