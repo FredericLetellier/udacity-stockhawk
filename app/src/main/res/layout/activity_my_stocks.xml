@@ -12,6 +12,48 @@
       android:layout_height="match_parent"
       />
 
+  <LinearLayout
+      android:layout_width="200dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_gravity="center"
+      android:visibility="gone"
+      android:id="@+id/llNoInternetView">
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_cloud_off_white_124dp"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/no_internet_message"/>
+  </LinearLayout>
+
+  <LinearLayout
+      android:layout_width="200dp"
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_gravity="center"
+      android:id="@+id/llNoStocksView"
+      android:visibility="gone">
+    <ImageView
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/ic_layers_clear_white_124dp"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:text="@string/no_stocks_message"/>
+  </LinearLayout>
+
   <com.melnykov.fab.FloatingActionButton
       android:id="@+id/fab"
       android:layout_width="wrap_content"
